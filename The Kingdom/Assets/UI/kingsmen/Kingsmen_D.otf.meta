@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 06a916ed3fbc7de4e90dbb01f4c505d0
+timeCreated: 1494163621
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Kingsmen
+  fontNames:
+  - Kingsmen
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
