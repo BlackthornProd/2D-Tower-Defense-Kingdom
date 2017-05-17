@@ -15,8 +15,12 @@ public class RandomAction : MonoBehaviour {
 	public Transform buttonTransform02;
 	public Transform noneButtonTransform;
 
+	AudioSource audio;
+	public AudioClip purchase;
+
 
 	void Start(){
+		audio = GetComponent<AudioSource>();
 		castle = GetComponent<Castle>();
 		gm = GetComponent<GameMaster>();
 	}
@@ -25,6 +29,8 @@ public class RandomAction : MonoBehaviour {
 
 		// Making sure we have enough gold to buy an action, and if we do, we buy one.
 		if(Input.GetKeyDown(KeyCode.Space) && gm.gold >= actionCost && castle.gameOver == false){
+			audio.clip = purchase;
+			audio.Play();
 			gm.gold -= actionCost;
 			TakeAction();
 		} 

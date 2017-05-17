@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour {
 
@@ -46,15 +47,15 @@ public class GameMaster : MonoBehaviour {
 
 		if(TimeBtwFreeGold <= 0 && castle.gameOver == false){
 			
-			if(spawner.waveNumber <= 4){
-				freeGold = 10f;
-			} else if(spawner.waveNumber > 4 && spawner.waveNumber <= 7){
+			if(spawner.waveNumber < 4){
 				freeGold = 20f;
+			} else if(spawner.waveNumber >= 4 && spawner.waveNumber <= 7){
+				freeGold = 35f;
 			} else if(spawner.waveNumber > 7){
-				freeGold = 30f;
+				freeGold = 50f;
 			}
 			gold += freeGold;
-			TimeBtwFreeGold = 8.5f;
+			TimeBtwFreeGold = 9.5f;
 			StartCoroutine(ShowFreeGold());
 		} else {
 			TimeBtwFreeGold -= Time.deltaTime;
@@ -78,13 +79,16 @@ public class GameMaster : MonoBehaviour {
 		hasBomb = false;
 	}
 
-
-
 	IEnumerator ShowFreeGold(){
 
 		freeGoldIncomeDisplay.enabled = true;
 		freeGoldIncomeDisplay.text = "FREE GOLD : " + freeGold;
 		yield return new WaitForSeconds(3f);
 		freeGoldIncomeDisplay.enabled = false;
+	}
+
+	public void RestartGame(){
+
+		SceneManager.LoadScene("Main Menu");
 	}
 }

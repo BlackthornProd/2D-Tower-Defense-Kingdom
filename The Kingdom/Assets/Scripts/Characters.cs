@@ -8,6 +8,9 @@ public class Characters : MonoBehaviour {
 	public int damage = 2;
 	public float refund = 10;
 
+	public float characterTime = 10f;
+	public Text timeLeft;
+
 	public Text healthDisplay;
 	public Text refundDisplay;
 	public GameObject goldUI;
@@ -19,7 +22,11 @@ public class Characters : MonoBehaviour {
 
 	Castle castle;
 
+	AudioSource audio;
+	public AudioClip ouch;
+
 	void Start(){
+		audio = GetComponent<AudioSource>();
 		castle = GameObject.FindGameObjectWithTag("Game Master").GetComponent<Castle>();
 		anim = GetComponent<Animator>();
 		refundDisplay.enabled = false;
@@ -30,9 +37,19 @@ public class Characters : MonoBehaviour {
 
 	void Update(){
 
+		timeLeft.text = "" +  Mathf.Round(characterTime);
+		characterTime -= Time.deltaTime;
+
 		healthDisplay.text = health.ToString();
 
+		if(characterTime <= 0){
+
+			health = 0;
+		}
+
 		if(health <= 0){
+			audio.clip = ouch;
+			audio.Play();
 			anim.Play("Death Animation");
 			damage = 0;
 			Destroy(gameObject, 1.25f);

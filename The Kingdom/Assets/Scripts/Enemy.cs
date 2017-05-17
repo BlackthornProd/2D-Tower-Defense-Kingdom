@@ -20,8 +20,12 @@ public class Enemy : MonoBehaviour {
 	Animator anim;
 	GameMaster gm;
 
+	Spawner spawner;
+	bool firstBoost = false;
+	bool secondBoost = false;
 
 	void Start(){
+		spawner = GameObject.FindGameObjectWithTag("Game Master").GetComponent<Spawner>();
 		gm = GameObject.FindGameObjectWithTag("Game Master").GetComponent<GameMaster>();
 		anim = GetComponent<Animator>();
 		rb2D = GetComponent<Rigidbody2D>();
@@ -31,6 +35,17 @@ public class Enemy : MonoBehaviour {
 	}
 
 	void Update(){
+
+		if(spawner.waveNumber >= 4 && firstBoost == false){
+			health++;
+			//damage++;
+			firstBoost = true;
+		}
+		if(spawner.waveNumber > 9 && secondBoost == false){
+			health++;
+			//damage++;
+			secondBoost = true;
+		}
 
 		if(gm.hasBomb == true){
 			health = 0;

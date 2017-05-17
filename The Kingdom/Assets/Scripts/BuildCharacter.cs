@@ -19,7 +19,12 @@ public class BuildCharacter : MonoBehaviour {
 	GameMaster gm;
 	RandomAction randomAction;
 
+	[Header ("Sounds")]
+	AudioSource audio;
+	public AudioClip pop;
+
 	void Start(){
+		audio = GetComponent<AudioSource>();
 		randomAction = GetComponent<RandomAction>();
 		gm = GetComponent<GameMaster>();
 	}
@@ -34,6 +39,8 @@ public class BuildCharacter : MonoBehaviour {
 
 		// Building an archer if you have enough gold...
 		if(gm.gold >= archerCost){
+			audio.clip = pop;
+			audio.Play();
 			gm.gold -= archerCost;
 			gm.isTimeToBuild = true;
 			gm.currentCharacterToBuild = archerCharacter;
@@ -50,6 +57,8 @@ public class BuildCharacter : MonoBehaviour {
 		}
 
 		if(gm.gold >= defenderCost){
+			audio.clip = pop;
+			audio.Play();
 			gm.gold -= defenderCost;
 			gm.isTimeToBuild = true;
 			gm.currentCharacterToBuild = defenderCharacter;
@@ -61,12 +70,12 @@ public class BuildCharacter : MonoBehaviour {
 	public void BuildMiner(){
 
 		if(gm.isTimeToDestroy == true){
-			Debug.Log("FFFFF");
 			return;
 		}
 
 		if(gm.gold >= minerCost){
-			Debug.Log("ffffdfdfsd");
+			audio.clip = pop;
+			audio.Play();
 			gm.gold -= minerCost;
 			gm.isTimeToBuild = true;
 			gm.currentCharacterToBuild = minerCharacter;
@@ -81,6 +90,8 @@ public class BuildCharacter : MonoBehaviour {
 		}
 
 		if(gm.gold >= bomberCost ){
+			audio.clip = pop;
+			audio.Play();
 			gm.gold -= bomberCost;
 			gm.isTimeToBuild = true;
 			gm.currentCharacterToBuild = bomberCharacter;
@@ -97,6 +108,8 @@ public class BuildCharacter : MonoBehaviour {
 		}
 
 		if(gm.gold >= priestCost){
+			audio.clip = pop;
+			audio.Play();
 			gm.gold -= priestCost;
 			gm.isTimeToBuild = true;
 			gm.currentCharacterToBuild = priestCharacter;

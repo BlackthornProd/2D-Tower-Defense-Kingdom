@@ -23,7 +23,16 @@ public class Castle : MonoBehaviour {
 	public Text healthCastle3Text;
 
 	public bool gameOver = false;
-	// public GameObject gameOverPanel;
+	public GameObject gameOverPanel;
+	public Text endGameText;
+	public Text waveText;
+	Spawner spawner;
+	public Text restartText;
+
+	void Start(){
+
+		spawner = GetComponent<Spawner>();
+	}
 
 
 	void Update(){
@@ -31,6 +40,12 @@ public class Castle : MonoBehaviour {
 		healthCastle1Text.text = healthCastle1.ToString();
 		healthCastle2Text.text = healthCastle2.ToString();
 		healthCastle3Text.text = healthCastle3.ToString();
+
+		if(healthCastle1 <= 0 || healthCastle2 <= 0 || healthCastle3 <= 0){
+			healthCastle1 = 0;
+			healthCastle2 = 0;
+			healthCastle3 = 0;
+		}
 
 		if(healthCastle1 <= 0){
 			gameOver = true;
@@ -48,6 +63,21 @@ public class Castle : MonoBehaviour {
 			gameOver = true;
 			castleDebris3.SetActive(true);
 			castle3.SetActive(false);
+		}
+
+		if(gameOver == true){
+			gameOverPanel.SetActive(true);
+			waveText.text = spawner.waveNumber.ToString();
+			if(spawner.waveNumber <= 1){
+				endGameText.text = "YOU ARE EITHER A DRUNK, INCOMPETENT, SICK OR VERY OLD RULER... OR MAYBE ALL FOUR !";
+			} else if(spawner.waveNumber > 1 && spawner.waveNumber < 5){
+				endGameText.text = "YOU LET YOUR PEOPLE DIE, WITHOUT PUTTING UP MUCH OF A FIGHT...";
+			} else if(spawner.waveNumber >= 5 && spawner.waveNumber <= 10){
+				endGameText.text = "YOU WERE BRAVE AND STRONG, A SHAME IT DID NOT LAST...";
+			} else if(spawner.waveNumber > 10){
+				endGameText.text = "YOU ARE A REAL DEFENDER, POWER RUNS THROUGH YOUR VEINS !";
+			}
+
 		}
 	}
 

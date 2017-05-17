@@ -69,16 +69,21 @@ public class Spawner : MonoBehaviour {
 			}
 
 			// Reseting to a new wave and making this new wave harder !
-			timeBtwWaves = 15f;
+			timeBtwWaves = 10f;
 			waveNumber++;
 
-			if(startNumberOfEnemies <= maxNumOfEnemies){
+			if(startNumberOfEnemies < maxNumOfEnemies){
 
 				startNumberOfEnemies += numberOfEnemiesIncrease;
 				numberOfEnemies = startNumberOfEnemies;
+
+			} else {
+
+				startNumberOfEnemies = maxNumOfEnemies;
+				numberOfEnemies = startNumberOfEnemies;
 			}
 
-			if(startTimeBtwSpawns >=  maxTimeBtwSpawns){
+			if(startTimeBtwSpawns >  maxTimeBtwSpawns){
 				startTimeBtwSpawns -= timeBtwSpawnsDecrease;
 				timeBtwSpawns = startTimeBtwSpawns;
 			}

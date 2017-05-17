@@ -29,7 +29,13 @@ public class Node : MonoBehaviour {
 	private GameObject character;
 	private float characterDestroyCost;
 
+	[Header("Sounds")]
+	AudioSource audio;
+	public AudioClip pop;
+	public AudioClip ouch;
+
 	void Start(){
+		audio = GetComponent<AudioSource>();
 		img = GetComponent<Image>();
 		//img.enabled = false;
 	}
@@ -127,6 +133,8 @@ public class Node : MonoBehaviour {
 
 		// this is to build a character
 		if(character == null && gm.isTimeToBuild == true){
+			audio.clip = pop;
+			audio.Play();
 			gm.isTimeToBuild = false;
 			Vector2 spawnPos = new Vector2(transform.position.x, transform.position.y -0.3f);
 			character = (GameObject) Instantiate(gm.currentCharacterToBuild, spawnPos, Quaternion.identity); // spawn character
@@ -149,6 +157,8 @@ public class Node : MonoBehaviour {
 
 		// this is to destroy a character
 		if(gm.isTimeToDestroy == true){
+			audio.clip = ouch;
+			audio.Play();
 			gm.isTimeToDestroy = false;
 			gm.gold += characterDestroyCost; // give the player back some gold.
 			gm.cancelDestroyButton.SetActive(false); 
